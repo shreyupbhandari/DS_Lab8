@@ -11,10 +11,10 @@ public class PriorityQueue<T> extends Queue<T>
    }
 
 
-    //@Override
+    @Override
    public void push(T val)
    {
-       super.push(val); //right now this is just a normal Queue as it will do what its parent did.
+       insertByPriority(val, compare);
    }
 
 
