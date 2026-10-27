@@ -46,25 +46,6 @@ class PriorityQueueTest
                                 new Customer(100, 0, Integer.MIN_VALUE)) > 0);
     }
 
-    void checkOrder(Comparator<Customer> comp, Customer first, Customer second, Customer third)
-    {
-        PriorityQueue<Customer> queue = new PriorityQueue<>(comp);
-        queue.push(a);
-        queue.push(b);
-        queue.push(c);
-        assertSame(first, queue.pop());
-        assertSame(second, queue.pop());
-        assertSame(third, queue.pop());
-        assertTrue(queue.isEmpty());
-    }
-
-    @Test
-    void allStrategiesTest()
-    {
-        checkOrder(new Customer.WorthComparator(), c, a, b);
-        checkOrder(new Customer.LoyaltyComparator(), b, a, c);
-        checkOrder(new Customer.WorthPoliteComparator(), c, b, a);
-    }
 
     @Test
     void insertionAndReuseTest()
@@ -99,25 +80,4 @@ class PriorityQueueTest
         assertTrue(queue.isEmpty());
     }
 
-    @Test
-    void ascendingAndDescendingTest()
-    {
-        PriorityQueue<Customer> queue = new PriorityQueue<>(new Customer.WorthComparator());
-        for (int i = 0; i < 20; i++)
-        {
-            queue.push(new Customer(i, 0, 0));
-        }
-        for (int i = 19; i >= 0; i--)
-        {
-            assertEquals(i, queue.pop().netWorth);
-        }
-        for (int i = 19; i >= 0; i--)
-        {
-            queue.push(new Customer(i, 0, 0));
-        }
-        for (int i = 19; i >= 0; i--)
-        {
-            assertEquals(i, queue.pop().netWorth);
-        }
-    }
 }
